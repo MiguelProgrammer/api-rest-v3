@@ -1,6 +1,8 @@
 package br.com.estudandoemcasa.clinica.entities;
 
 
+import br.com.estudandoemcasa.clinica.model.Doutor;
+import br.com.estudandoemcasa.clinica.model.Endereco;
 import br.com.estudandoemcasa.clinica.model.Especialidade;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,4 +31,13 @@ public class DoutorEntity {
 
     @Embedded
     private EnderecoEntity endereco;
+
+    public DoutorEntity(Doutor doutor) {
+        this.id = doutor.id();;
+        this.nome = doutor.nome();
+        this.email = doutor.email();
+        this.crm = doutor.crm();
+        this.especialidade = doutor.especialidade();
+        this.endereco = new EnderecoEntity(doutor.endereco());
+    }
 }
