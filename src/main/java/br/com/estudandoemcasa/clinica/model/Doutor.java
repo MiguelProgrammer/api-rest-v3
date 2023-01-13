@@ -1,15 +1,5 @@
 package br.com.estudandoemcasa.clinica.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+public record Doutor(Long id, String nome, String email, String crm, Especialidade especialidade, Endereco endereco){
 
-@Getter
-@Setter
-@ToString
-public class Doutor {
-
-    private Long id;
-    private String nome;
-    private String crn;
 }
