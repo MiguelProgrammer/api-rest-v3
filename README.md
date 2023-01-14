@@ -15,3 +15,11 @@ Technologies used:<br>
 
 ## Class Record
 <p>Record class, created from java 16, has the purpose of creating basic attributes of a class, in this project, I use it as responsible for my DTO entities, and it works perfectly, under the covers, java manipulates the record class to to behave as such.</p>
+
+## Database versioning with flyway migrations
+* V1__create-table-medico.sql
+* V2__alter-table-medico-add-tel.sql
+* V3__alter-table-medico-add-ativo.sql
+<hr>
+
+<p>In this project, the current annotations for the spring boot 3 version, database versioning, the importance of using Record Classes to behave like DTO's, I emphasize the importance of using DTO's to move objects , see why to use it, it's worth a lot if you want your application to also be protected against attacks, this study will continue in the api-rest-v4 study project</p>
