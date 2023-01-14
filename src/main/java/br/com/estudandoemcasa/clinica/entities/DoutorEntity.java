@@ -2,20 +2,20 @@ package br.com.estudandoemcasa.clinica.entities;
 
 
 import br.com.estudandoemcasa.clinica.model.Doutor;
-import br.com.estudandoemcasa.clinica.model.Endereco;
 import br.com.estudandoemcasa.clinica.model.Especialidade;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.Hibernate;
+
+import java.util.Objects;
 
 @Table(name = "doutores")
 @Entity(name = "Medico")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
 public class DoutorEntity {
 
     @Id
@@ -24,6 +24,7 @@ public class DoutorEntity {
 
     private String nome;
     private String email;
+    private String telefone;
     private String crm;
 
     @Enumerated(EnumType.STRING)
@@ -36,8 +37,22 @@ public class DoutorEntity {
         this.id = doutor.id();;
         this.nome = doutor.nome();
         this.email = doutor.email();
+        this.telefone = doutor.telefone();
         this.crm = doutor.crm();
         this.especialidade = doutor.especialidade();
         this.endereco = new EnderecoEntity(doutor.endereco());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        DoutorEntity that = (DoutorEntity) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
