@@ -57,4 +57,13 @@ public class MedicoController {
             }
         }
     }
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public void listar(@PathVariable("id") Long id){
+        var dt =  doutorRepository.findById(id);
+        if(Objects.nonNull(dt)){
+            doutorRepository.deleteById(dt.get().getId());
+        }
+    }
 }
