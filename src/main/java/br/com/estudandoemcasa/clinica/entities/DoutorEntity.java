@@ -4,6 +4,7 @@ package br.com.estudandoemcasa.clinica.entities;
 import br.com.estudandoemcasa.clinica.model.Doutor;
 import br.com.estudandoemcasa.clinica.model.Especialidade;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,13 +30,13 @@ public class DoutorEntity {
     @Setter
     private String telefone;
     private String crm;
-
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
-
     @Setter
     @Embedded
     private EnderecoEntity endereco;
+    @Setter
+    private Boolean ativo;
 
     public DoutorEntity(Doutor doutor) {
         this.id = doutor.id();;
@@ -45,6 +46,7 @@ public class DoutorEntity {
         this.crm = doutor.crm();
         this.especialidade = doutor.especialidade();
         this.endereco = new EnderecoEntity(doutor.endereco());
+        this.ativo = true;
     }
 
     @Override

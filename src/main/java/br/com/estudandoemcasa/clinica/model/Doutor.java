@@ -15,7 +15,6 @@ public record Doutor(
         @Email
         @NotBlank
         String email,
-
         @NotBlank
         String telefone,
         @NotBlank
@@ -25,6 +24,8 @@ public record Doutor(
         Especialidade especialidade,
         @NotNull
         @Valid
-        Endereco endereco){
+        Endereco endereco,
+
+        Boolean ativo){
 
 }

@@ -32,9 +32,15 @@ public class MedicoController {
         doutorRepository.save(new DoutorEntity(doutor));
     }
     @GetMapping("/listar")
-    public Page<DoutorDTO> listar(@PageableDefault(size = 2, sort = {"crm"}) Pageable pageable){
+    public Page<DoutorDTO> listar(@PageableDefault(size = 7, sort = {"crm"}) Pageable pageable){
         return doutorRepository.findAll(pageable).map(dt -> {
-            return new DoutorDTO(dt.getId(), dt.getNome(), dt.getEmail(), dt.getCrm(), dt.getEspecialidade());
+            return new DoutorDTO(dt.getId(), dt.getNome(), dt.getEmail(), dt.getCrm(), dt.getEspecialidade(), dt.getAtivo());
+        });
+    }
+    @GetMapping("/listar/ativos")
+    public Page<DoutorDTO> listarAtivos(@PageableDefault(size = 7, sort = {"crm"}) Pageable pageable){
+        return doutorRepository.findAllByAtivoTrue(pageable).map(dt -> {
+            return new DoutorDTO(dt.getId(), dt.getNome(), dt.getEmail(), dt.getCrm(), dt.getEspecialidade(), dt.getAtivo());
         });
     }
 
@@ -55,6 +61,10 @@ public class MedicoController {
             if(Objects.nonNull(doutor.endereco())) {
                 dt.get().setEndereco(new EnderecoEntity(doutor.endereco()));
             }
+
+            if(Objects.nonNull(doutor.ativo())) {
+                dt.get().setAtivo(doutor.ativo());
+            }
         }
     }
 
@@ -63,7 +73,7 @@ public class MedicoController {
     public void listar(@PathVariable("id") Long id){
         var dt =  doutorRepository.findById(id);
         if(Objects.nonNull(dt)){
-            doutorRepository.deleteById(dt.get().getId());
+            dt.get().setAtivo(false);
         }
     }
 }
