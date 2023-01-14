@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;
@@ -22,14 +23,17 @@ public class DoutorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     private String nome;
     private String email;
+    @Setter
     private String telefone;
     private String crm;
 
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
 
+    @Setter
     @Embedded
     private EnderecoEntity endereco;
 
